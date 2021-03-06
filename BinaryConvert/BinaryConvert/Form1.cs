@@ -66,7 +66,10 @@ namespace BinaryConvert
             double check_max_value = 0;
             double.TryParse(data, out check_max_value);
             if (check_max_value > max_range[type])
+            {
+                MessageBox.Show("Over range of data type!");
                 return true;
+            }
             return false;
         }
 
@@ -85,7 +88,10 @@ namespace BinaryConvert
             double check_min_value = 0;
             double.TryParse(data, out check_min_value);
             if (check_min_value < min_range[type])
+            {
+                MessageBox.Show("Over range of data type!");
                 return true;
+            }
             return false;
         }
 
@@ -189,7 +195,13 @@ namespace BinaryConvert
             else if (type == 2 || type == 3) hex_size = 4;
             else if (type == 4 || type == 5 || type == 6) hex_size = 8;
             else if (type == 7) hex_size = 16;
-
+            if(hex_value.Length > hex_size)
+            {
+                MessageBox.Show("Over range of data type!");
+                hex_value = "F";
+                while (hex_value.Length < hex_size)
+                    hex_value = "F" + hex_value;
+            }
             while (hex_value.Length < hex_size)
                 hex_value = "0" + hex_value;
             return true;
@@ -304,7 +316,12 @@ namespace BinaryConvert
                     break;
             }
             if (data_bin.Length > bit_size)
+            {
+                string max = new string('1', bit_size);
+                data_bin = max;
+                MessageBox.Show("Over range of data type!");
                 return false;
+            }
             for(int i=0; i<data_bin.Length; i++)
             {
                 if (data_bin[i] != '0' && data_bin[i] != '1')
@@ -317,7 +334,7 @@ namespace BinaryConvert
             return true;
         }
 
-        public string ConvertBinaryToHex(string data_bin, string data_type)
+        public string ConvertBinaryToHex(ref string data_bin, string data_type)
         {
             string hex_value = "0";
             int type = GetDataType(data_type);
@@ -519,7 +536,7 @@ namespace BinaryConvert
             }
             else if(type_convert == "From Binary")
             {
-                hex_str = ConvertBinaryToHex(binary_str, data_type);
+                hex_str = ConvertBinaryToHex(ref binary_str, data_type);
                 decimal_str = ConvertHexToDecimal(ref hex_str, data_type);
             }
             else
