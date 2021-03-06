@@ -91,6 +91,9 @@ namespace BinaryConvert
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            comboBox1.Items.Add("From Hexadecimal");
+            comboBox1.Items.Add("From Decimal");
+            comboBox1.Items.Add("From Binary");
 
         }
 
@@ -166,13 +169,35 @@ namespace BinaryConvert
                     hex_size = 16;
                 }
             }
-            for (int i = 0; i < hex_size - hex_value.Length; i++)
+            while(hex_size > hex_value.Length)
                 hex_value = "0" + hex_value;
             return hex_value;
         }
 
+        public static bool IsInvalidHexNumber(ref string hex_value, int type)
+        {
+            hex_value = hex_value.ToUpper();
+            List<char> list_char_hex = new List<char>()
+            {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+            };
+            for (int i = 0; i < hex_value.Length; i++)
+                if (!list_char_hex.Contains(hex_value[i]))
+                    return false;
+            int hex_size = 0;
+            if (type == 0 || type == 1) hex_size = 2;
+            else if (type == 2 || type == 3) hex_size = 4;
+            else if (type == 4 || type == 5 || type == 6) hex_size = 8;
+            else if (type == 7) hex_size = 16;
+
+            while (hex_value.Length < hex_size)
+                hex_value = "0" + hex_value;
+            return true;
+        }
+
         public static string ConvertHexToBinary(string hex_value)
         {
+
             string bit_sequence = "";
             for(int i=0; i<hex_value.Length; i++)
             {
@@ -353,56 +378,58 @@ namespace BinaryConvert
             return hex_value;
 
         }
-        public static string ConvertHexToDecimal(string hex_value, string data_type)
+        public static string ConvertHexToDecimal(ref string hex_value, string data_type)
         {
             int type = GetDataType(data_type);
             string decimal_str = "0.0";
+            if (IsInvalidHexNumber(ref hex_value, type))
+            {
+                if (type == 0)   //unsigned char/byte
+                {
+                    byte number_byte = Convert.ToByte(hex_value, 16);
+                    decimal_str = number_byte.ToString();
+                }
+                else if (type == 1)  //signed char/byte
+                {
+                    sbyte number_sbyte = Convert.ToSByte(hex_value, 16);
+                    decimal_str = number_sbyte.ToString();
+                }
+                else if (type == 2)  //unsigned short
+                {
+                    ushort number_ushort = Convert.ToUInt16(hex_value, 16);
+                    decimal_str = number_ushort.ToString();
+                }
+                else if (type == 3)  //short
+                {
+                    short number_short = Convert.ToInt16(hex_value, 16);
+                    decimal_str = number_short.ToString();
+                }
+                else if (type == 4)  //usigned int
+                {
+                    uint number_uint = Convert.ToUInt32(hex_value, 16);
+                    decimal_str = number_uint.ToString();
+                }
+                else if (type == 5)   //int
+                {
+                    int number_int = Convert.ToInt32(hex_value, 16);
+                    decimal_str = number_int.ToString();
+                }
+                else if (type == 6) //float
+                {
+                    int number_int = Convert.ToInt32(hex_value, 16);
+                    float number_float = BitConverter.ToSingle(BitConverter.GetBytes(number_int), 0);
+                    decimal_str = number_float.ToString();
 
-            if (type == 0)   //unsigned char/byte
-            {
-                byte number_byte = Convert.ToByte(hex_value, 16);
-                decimal_str = number_byte.ToString();
-            }
-            else if (type == 1)  //signed char/byte
-            {
-                sbyte number_sbyte = Convert.ToSByte(hex_value, 16);
-                decimal_str = number_sbyte.ToString();
-            }
-            else if (type == 2)  //unsigned short
-            {
-                ushort number_ushort = Convert.ToUInt16(hex_value, 16);
-                decimal_str = number_ushort.ToString();
-            }
-            else if (type == 3)  //short
-            {
-                short number_short = Convert.ToInt16(hex_value, 16);
-                decimal_str = number_short.ToString();
-            }
-            else if (type == 4)  //usigned int
-            {
-                uint number_uint = Convert.ToUInt32(hex_value, 16);
-                decimal_str = number_uint.ToString();
-            }
-            else if (type == 5)   //int
-            {
-                int number_int = Convert.ToInt32(hex_value, 16);
-                decimal_str = number_int.ToString();
-            }
-            else if (type == 6) //float
-            {               
-                int number_int = Convert.ToInt32(hex_value, 16);
-                float number_float = BitConverter.ToSingle(BitConverter.GetBytes(number_int), 0);
-                decimal_str = number_float.ToString();
+                }
+                else    //double
+                {
+                    long number_long = Convert.ToInt64(hex_value, 16);
+                    double number_double = BitConverter.Int64BitsToDouble(number_long);
+                    decimal_str = number_double.ToString();
+                }
 
             }
-            else    //double
-            {
-                long number_long = Convert.ToInt64(hex_value, 16);
-                double number_double = BitConverter.Int64BitsToDouble(number_long);
-                decimal_str = number_double.ToString();
-            }
-
-            return decimal_str;
+                return decimal_str;
         }
 
         string data_type = "";
@@ -464,57 +491,43 @@ namespace BinaryConvert
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (data_type == "")
+            if(data_type == "")
             {
-                MessageBox.Show("Please choose a datatype");
+                MessageBox.Show("Please choose a data type!");
                 return;
             }
-
-            string hex_value = ConvertDecimalToHex(textBoxInput.Text, data_type);
-            textBoxHex.Text ="0x" + hex_value;
-            textBoxOutput.Text = ConvertHexToBinary(hex_value);
-        }
-
-        private void textBoxInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void groupBox4_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            if (data_type == "")
+            string type_convert = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
+            string decimal_str = textBoxDecimal.Text;
+            string hex_str = textBoxHex.Text;
+            string binary_str = textBoxBinary.Text;
+            if(type_convert == "From Decimal")
             {
-                MessageBox.Show("Please choose a datatype");
+                hex_str = ConvertDecimalToHex(decimal_str, data_type);
+                binary_str = ConvertHexToBinary(hex_str);
+            }
+            else if(type_convert == "From Hexadecimal")
+            {
+                decimal_str = ConvertHexToDecimal(ref hex_str, data_type);
+                binary_str = ConvertHexToBinary(hex_str);
+            }
+            else if(type_convert == "From Binary")
+            {
+                hex_str = ConvertBinaryToHex(binary_str, data_type);
+                decimal_str = ConvertHexToDecimal(ref hex_str, data_type);
+            }
+            else
+            {
+                MessageBox.Show("Please choose a type convert!");
                 return;
             }
+            textBoxBinary.Text = binary_str;
+            textBoxDecimal.Text = decimal_str;
+            textBoxHex.Text = hex_str;
+        }
 
-            string hex_value = ConvertBinaryToHex(textBoxInput.Text, data_type);
-            textBoxHex.Text = "0x" + hex_value;
-            textBoxOutput.Text = ConvertHexToDecimal(hex_value, data_type);
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
