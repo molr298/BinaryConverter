@@ -224,9 +224,9 @@ namespace BinaryConvert
             // 
             // textBoxBinary
             // 
-            this.textBoxBinary.Location = new System.Drawing.Point(131, 149);
+            this.textBoxBinary.Location = new System.Drawing.Point(115, 149);
             this.textBoxBinary.Name = "textBoxBinary";
-            this.textBoxBinary.Size = new System.Drawing.Size(607, 26);
+            this.textBoxBinary.Size = new System.Drawing.Size(623, 26);
             this.textBoxBinary.TabIndex = 2;
             // 
             // textBoxHex
@@ -238,9 +238,9 @@ namespace BinaryConvert
             // 
             // textBoxDecimal
             // 
-            this.textBoxDecimal.Location = new System.Drawing.Point(131, 38);
+            this.textBoxDecimal.Location = new System.Drawing.Point(115, 38);
             this.textBoxDecimal.Name = "textBoxDecimal";
-            this.textBoxDecimal.Size = new System.Drawing.Size(312, 26);
+            this.textBoxDecimal.Size = new System.Drawing.Size(328, 26);
             this.textBoxDecimal.TabIndex = 0;
             // 
             // label5
