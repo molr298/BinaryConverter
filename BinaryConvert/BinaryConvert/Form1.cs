@@ -104,7 +104,7 @@ namespace BinaryConvert
             {
                 if (IsOverMaxRange(data_str, type))
                 {
-                    hex_value = "1";
+                    hex_value = "F";
                     return hex_value;
                 }
                 if (IsOverMinRange(data_str, type))
@@ -199,6 +199,7 @@ namespace BinaryConvert
         {
 
             string bit_sequence = "";
+            int count = 0;
             for(int i=0; i<hex_value.Length; i++)
             {
                 switch (hex_value[i])
@@ -259,6 +260,12 @@ namespace BinaryConvert
                         break;
                     default:
                         break;
+                }
+                count++;
+                if(count == 2)
+                {
+                    bit_sequence += " ";
+                    count = 0;
                 }
             }
             return bit_sequence;
