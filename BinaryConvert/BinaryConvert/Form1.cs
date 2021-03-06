@@ -67,7 +67,7 @@ namespace BinaryConvert
             double.TryParse(data, out check_max_value);
             if (check_max_value > max_range[type])
             {
-                MessageBox.Show("Over range of data type!");
+                MessageBox.Show("The input value is out of range!");
                 return true;
             }
             return false;
@@ -89,7 +89,7 @@ namespace BinaryConvert
             double.TryParse(data, out check_min_value);
             if (check_min_value < min_range[type])
             {
-                MessageBox.Show("Over range of data type!");
+                MessageBox.Show("The input value is out of range!");
                 return true;
             }
             return false;
@@ -319,7 +319,7 @@ namespace BinaryConvert
             {
                 string max = new string('1', bit_size);
                 data_bin = max;
-                MessageBox.Show("Over range of data type!");
+                MessageBox.Show("The input value is out of range!");
                 return false;
             }
             for(int i=0; i<data_bin.Length; i++)
@@ -526,16 +526,31 @@ namespace BinaryConvert
             string binary_str = textBoxBinary.Text;
             if(type_convert == "From Decimal")
             {
+                if (decimal_str == "")
+                {
+                    MessageBox.Show("Please enter a value!");
+                    return;
+                }
                 hex_str = ConvertDecimalToHex(decimal_str, data_type);
                 binary_str = ConvertHexToBinary(hex_str);
             }
             else if(type_convert == "From Hexadecimal")
             {
+                if (hex_str == "")
+                {
+                    MessageBox.Show("Please enter a value!");
+                    return;
+                }
                 decimal_str = ConvertHexToDecimal(ref hex_str, data_type);
                 binary_str = ConvertHexToBinary(hex_str);
             }
             else if(type_convert == "From Binary")
             {
+                if (binary_str == "")
+                {
+                    MessageBox.Show("Please enter a value!");
+                    return;
+                }
                 hex_str = ConvertBinaryToHex(ref binary_str, data_type);
                 decimal_str = ConvertHexToDecimal(ref hex_str, data_type);
             }

@@ -39,6 +39,7 @@ namespace BinaryConvert
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,7 +48,6 @@ namespace BinaryConvert
             this.textBoxBinary = new System.Windows.Forms.TextBox();
             this.textBoxHex = new System.Windows.Forms.TextBox();
             this.textBoxDecimal = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -175,9 +175,18 @@ namespace BinaryConvert
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Convert";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(127, 96);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(25, 20);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "0x";
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(481, 87);
+            this.button1.Location = new System.Drawing.Point(521, 84);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(203, 45);
             this.button1.TabIndex = 7;
@@ -188,11 +197,11 @@ namespace BinaryConvert
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(481, 38);
+            this.comboBox1.Location = new System.Drawing.Point(507, 38);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(203, 28);
+            this.comboBox1.Size = new System.Drawing.Size(231, 28);
             this.comboBox1.TabIndex = 6;
-            this.comboBox1.Text = "(choose type convert)";
+            this.comboBox1.Text = "(choose a conversion type)";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label3
@@ -228,6 +237,7 @@ namespace BinaryConvert
             this.textBoxBinary.Name = "textBoxBinary";
             this.textBoxBinary.Size = new System.Drawing.Size(623, 26);
             this.textBoxBinary.TabIndex = 2;
+            this.textBoxBinary.Text = "0";
             // 
             // textBoxHex
             // 
@@ -235,6 +245,7 @@ namespace BinaryConvert
             this.textBoxHex.Name = "textBoxHex";
             this.textBoxHex.Size = new System.Drawing.Size(286, 26);
             this.textBoxHex.TabIndex = 1;
+            this.textBoxHex.Text = "0";
             // 
             // textBoxDecimal
             // 
@@ -242,15 +253,7 @@ namespace BinaryConvert
             this.textBoxDecimal.Name = "textBoxDecimal";
             this.textBoxDecimal.Size = new System.Drawing.Size(328, 26);
             this.textBoxDecimal.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(127, 96);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 20);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "0x";
+            this.textBoxDecimal.Text = "0";
             // 
             // Form1
             // 
