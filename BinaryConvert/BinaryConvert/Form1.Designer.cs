@@ -47,7 +47,6 @@ namespace BinaryConvert
             this.textBoxBinary = new System.Windows.Forms.TextBox();
             this.textBoxHex = new System.Windows.Forms.TextBox();
             this.textBoxDecimal = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -244,15 +243,6 @@ namespace BinaryConvert
             this.textBoxDecimal.Size = new System.Drawing.Size(312, 26);
             this.textBoxDecimal.TabIndex = 0;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 20);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "label4";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -267,18 +257,16 @@ namespace BinaryConvert
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 415);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Name = "Form1";
-            this.Text = " a";
+            this.Text = "Binary converter IEEE754";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -302,7 +290,6 @@ namespace BinaryConvert
         private System.Windows.Forms.TextBox textBoxHex;
         private System.Windows.Forms.TextBox textBoxDecimal;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
     }
 }
 
